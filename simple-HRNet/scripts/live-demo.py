@@ -27,7 +27,7 @@ def main(camera_id, filename, hrnet_m, hrnet_c, hrnet_j, hrnet_weights, hrnet_jo
         else:
             device = torch.device('cpu')
 
-    # print(device)
+    print(device)
 
     image_resolution = ast.literal_eval(image_resolution)
     has_display = 'DISPLAY' in os.environ.keys() or sys.platform == 'win32'
