@@ -8,7 +8,9 @@ import torch
 from vidgear.gears import CamGear
 import numpy as np
 
-sys.path.insert(1, os.getcwd())
+# sys.path.insert(1, os.getcwd())
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
 from SimpleHRNet import SimpleHRNet
 from misc.visualization import draw_points, draw_skeleton, draw_points_and_skeleton, joints_dict, check_video_rotation
 from misc.utils import find_person_id_associations
@@ -47,10 +49,13 @@ def main(camera_id, filename, hrnet_m, hrnet_c, hrnet_j, hrnet_weights, hrnet_jo
          yolo_model_def="./models/detectors/yolo/config/yolov3-tiny.cfg"
          yolo_class_path="./models/detectors/yolo/data/coco.names"
          yolo_weights_path="./models/detectors/yolo/weights/yolov3-tiny.weights"
+
+    #------------------------------------------------------------------------------------------------------------------
     else:
-         yolo_model_def="./models/detectors/yolo/config/yolov3.cfg"
-         yolo_class_path="./models/detectors/yolo/data/coco.names"
-         yolo_weights_path="./models/detectors/yolo/weights/yolov3.weights"
+         yolo_model_def="C:/deep/H36M-to-COCO/simple-HRNet/models/detectors/yolo/config/yolov3.cfg"
+         yolo_class_path="C:/deep/H36M-to-COCO/simple-HRNet/models/detectors/yolo/data/coco.names"
+         yolo_weights_path="C:/deep/H36M-to-COCO/simple-HRNet/models/detectors/yolo/weights/yolov3.weights"
+    #------------------------------------------------------------------------------------------------------------------
 
     model = SimpleHRNet(
         hrnet_c,
@@ -152,8 +157,12 @@ if __name__ == '__main__':
     parser.add_argument("--hrnet_c", "-c", help="hrnet parameters - number of channels (if model is HRNet), "
                                                 "resnet size (if model is PoseResNet)", type=int, default=48)
     parser.add_argument("--hrnet_j", "-j", help="hrnet parameters - number of joints", type=int, default=17)
+
+    # ------------------------------------------------------------------------------------------------------------------
     parser.add_argument("--hrnet_weights", "-w", help="hrnet parameters - path to the pretrained weights",
-                        type=str, default="./weights/pose_hrnet_w48_384x288.pth")
+                        type=str, default="C:/deep/H36M-to-COCO/simple-HRNet/weights/pose_hrnet_w48_384x288.pth")
+    # -----------------------------------------------------------------------------------------------------------------
+
     parser.add_argument("--hrnet_joints_set",
                         help="use the specified set of joints ('coco' and 'mpii' are currently supported)",
                         type=str, default="coco")
